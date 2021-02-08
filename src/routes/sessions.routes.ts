@@ -6,11 +6,13 @@ import AuthenticateUserService from '../services/AuthenticateUserService';
 
 sessionsRouter.post('/', async (request, response) => {
   try {
+    console.log('ROUTE_EMAIL: ', request.body);
+
     const { email, password } = request.body;
 
     const authenticateUser = new AuthenticateUserService();
 
-    const { user } = await authenticateUser.execute({
+    const { user, token } = await authenticateUser.execute({
       email,
       password,
     });
@@ -23,7 +25,7 @@ sessionsRouter.post('/', async (request, response) => {
       updated_at: user.updated_at,
     };
 
-    return response.json({ user: userWithoutPassword });
+    return response.json({ user: userWithoutPassword, token });
   } catch (err) {
     return response.status(400).json({ error: err.message });
   }
