@@ -14,6 +14,9 @@ class User {
   name: string;
 
   @Column('varchar')
+  avatar: string;
+
+  @Column('varchar')
   email: string;
 
   @Column('varchar')
