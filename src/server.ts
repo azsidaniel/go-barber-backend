@@ -4,11 +4,11 @@ import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 
-import routes from './routes';
-import './database';
+import routes from './shared/routes';
+import './shared/database';
 import uploadConfig from './config/upload';
 
-import AppError from './errors/AppError';
+import AppError from './shared/errors/AppError';
 
 const app = express();
 
@@ -35,6 +35,6 @@ app.use(
   },
 );
 
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
+app.listen(4444, () => {
+  console.log('Server started on port 4444');
 });

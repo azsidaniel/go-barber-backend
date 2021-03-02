@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 const sessionsRouter = Router();
 
-import AuthenticateUserService from '../services/AuthenticateUserService';
+import AuthenticateUserService from '../../modules/users/services/AuthenticateUserService';
 
 sessionsRouter.post('/', async (request, response) => {
   console.log('ROUTE_EMAIL: ', request.body);
