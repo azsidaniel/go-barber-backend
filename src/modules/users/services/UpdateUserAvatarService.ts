@@ -4,17 +4,18 @@ import fs from 'fs';
 import User from '../infra/typeorm/entities/User';
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
+import IUsersRepository from '../repositories/IUsersRepository';
 
-type RequestDTO = {
+type IRequestDTO = {
   id: string;
   filename: string;
 };
 
 class UpdateUserAvatarService {
-  public async execute({ id, filename }: RequestDTO): Promise<User> {
-    const usersRepository = getRepository(User);
+  constructor(private usersRepository: IUsersRepository) {}
 
-    const user = await usersRepository.findOne(id);
+  public async execute({ id, filename }: IRequestDTO): Promise<User> {
+    const user = await this.usersRepository.findById(id);
 
     if (!user) {
       throw new AppError(
@@ -34,7 +35,7 @@ class UpdateUserAvatarService {
 
     user.avatar = filename;
 
-    await usersRepository.save(user);
+    await this.usersRepository.save(user);
 
     return user;
   }
