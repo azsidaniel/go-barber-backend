@@ -1,7 +1,4 @@
 import IStorageProvider from '../models/IStorageProvider';
-import fs from 'fs';
-import path from 'path';
-import upload from '@config/upload';
 
 class DiskStorageProvider implements IStorageProvider {
   private storage: string[] = [];
