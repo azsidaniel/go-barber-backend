@@ -2,7 +2,7 @@ import IUsersRepository from '../repositories/IUsersRepository';
 import { injectable, inject } from 'tsyringe';
 import { isAfter, addHours } from 'date-fns';
 import AppError from '@shared/errors/AppError';
-import IUserTokenRepository from '../repositories/IUserTokenRepository';
+import IUserTokenRepository from '../repositories/IUserTokensRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
 type IRequestDTO = {
