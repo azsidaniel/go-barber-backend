@@ -1,5 +1,4 @@
 node_modules/
 tmp/*
 !tmp/.gitkeep
-/coverage.data
-/coverage/
+/coverage
