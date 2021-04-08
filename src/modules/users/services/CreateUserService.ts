@@ -10,17 +10,18 @@ type IRequestDTO = {
   password: string;
 };
 
-injectable();
+@injectable()
 class CreateUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
+    @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) {}
 
   public async execute({ name, email, password }: IRequestDTO): Promise<User> {
     const checkUserExists = await this.usersRepository.findByEmail(email);
-
     if (checkUserExists) {
       throw new AppError('Email adress is already in use.');
     }

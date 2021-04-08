@@ -8,7 +8,7 @@ type IRequestDTO = {
   email: string;
 };
 
-injectable();
+@injectable()
 class SendForgotPasswordEmailService {
   constructor(
     @inject('UsersRepository')
@@ -17,7 +17,7 @@ class SendForgotPasswordEmailService {
     @inject('MailProvider')
     private mailProvider: IMailProvider,
 
-    @inject('userTokensRepository')
+    @inject('UserTokensRepository')
     private userTokenRepository: IUserTokenRepository,
   ) {}
 
@@ -28,11 +28,11 @@ class SendForgotPasswordEmailService {
       throw new AppError('User does not exist');
     }
 
-    await this.userTokenRepository.generate(user.id);
+    const { token } = await this.userTokenRepository.generate(user.id);
 
-    this.mailProvider.sendMail(
+    await this.mailProvider.sendMail(
       email,
-      'Pedido de recuperação de senha recebido.',
+      `Pedido de recuperação de senha recebido: ${token}`,
     );
   }
 }
